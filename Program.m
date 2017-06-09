@@ -3,6 +3,7 @@ classdef Program
         prog
         debug
         symboltable
+        initialPC
 %         line
 %         command
 %         comment

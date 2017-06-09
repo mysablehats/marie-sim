@@ -27,9 +27,8 @@ program(linestoclear) = [];
 clear linestoclear
 
 for i =1:length(program)
-    if ~isempty(strfind(program(i).line,'/'))||~isempty(strfind(program(i).line,';'))
-        commentdelim = min([strfind(program(i).line,'/') strfind(program(i).line,';')]) ;
-        firstcommentdelim = commentdelim(1);
+    if ~isempty(findfirstcommentdelimiter(program(i).line))
+        firstcommentdelim = findfirstcommentdelimiter(program(i).line);
         program(i).command = program(i).line(1:(firstcommentdelim)-1);
         program(i).comment = program(i).line((firstcommentdelim+1):end);
     else
@@ -64,9 +63,37 @@ end
 
 %%% create program's memory location
 
+%%% first neet to check i dont have an ORG instruction
+numoforgs = 0;
+lineexist = zeros(1,length(program));
+offsetvect = lineexist; 
 for i =1:length(program)
-    program(i).memlocation = dec2hex(i-1,3);
+    if strcmp(program(i).operation,'ORG')
+        offsetvect(i) = hex2dec(program(i).operand);
+        numoforgs = numoforgs +1; 
+        if numoforgs>1||i>1
+            warning('ORG instruction found! Not tested for multiple or non initil ORG instructions. Proceed with care!')
+        end
+        lineexist(i) = 0;
+    else
+        if i>1
+            offsetvect(i) = offsetvect(i-1);
+        else
+            offesetvect(i) = 0;
+        end
+        lineexist(i) = 1; %%% will keep lines that are not ORG
+    end
 end
+program = program(find(lineexist));
+offsetvect = offsetvect(find(lineexist)); 
+
+for i =1:length(program)
+    program(i).memlocation = dec2hex(i-1+offsetvect(i),3);
+end
+
+%%% set up inition PC
+initialPC = program(1).memlocation;
+
 
 %%% actually this was not quite correct, because maybe we want to hard
 %%% adress memory and do other weird things, so we should create the whole
@@ -91,7 +118,7 @@ for i =1:length(program)
     if ~isempty(program(i).label)
         numsymbols = numsymbols +1;
         symboltable(numsymbols).symbol = program(i).label;
-        symboltable(numsymbols).memlocation = dec2hex(i-1,3);
+        symboltable(numsymbols).memlocation = dec2hex(i-1+offsetvect(i),3);
     end
 end
 
@@ -189,3 +216,4 @@ Prog = Program();
 Prog = Prog.parse(program);
 Prog.debug = debug;
 Prog.symboltable = symboltable;
+Prog.initialPC = initialPC;

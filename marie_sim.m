@@ -5,7 +5,7 @@ function [output, Prog] = marie_sim(Prog, input)
 
 %%% Implements the program itself
 AC = dec2hex(0,4);
-PC = dec2hex(0,3);
+PC = Prog.initialPC;%dec2hex(0,3);
 
 %%% starts output to nothing:
 output.value = {};
@@ -13,7 +13,7 @@ output.counter = 0;
 
 %%% sets debug variables:
 Prog.debug.realprogramcounter = 0;
-Prog.debug.maxnumiterations = 10000;
+Prog.debug.maxnumiterations = 100000;
 Prog.debug.crashreason = '';
 Prog.debug.ME = '';
 Prog.debug.PC = PC;

@@ -13,7 +13,7 @@ for i = 1:100
     end
 end        
 
-AAA = AA + 0.1*rand(size(AA)); % otherwise identical submissions will be condensed too closely
+AAA = AA + 0.05*rand(size(AA)); % otherwise identical submissions will be condensed too closely
 DD = pdist(AAA');
 ZZ = linkage(DD);
 dendrogram(ZZ,0, 'Orientation','left', 'Labels', num2str(labels(:)))

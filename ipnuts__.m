@@ -1,6 +1,7 @@
 %%%%ipnuts
 %%% if they run the sum and fact at the same time:
 inputs1 = {0 1 2 3 4 5 6 7 8 -1 -6 255 256};
+inputs10= {[0 1 2 3 4 5 6 7 8 -1 -6 255 256]};
 inputs11 = {10};
 %%% if runs sum, then mult, then fact:
 vectinput = [2 2 2 2];

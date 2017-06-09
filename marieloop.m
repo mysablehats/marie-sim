@@ -19,8 +19,17 @@ end
 clear inputs input
 ipnuts__
 inputs = inputs1;
-%inputs = shufflecell(constructinput([2 2 2 2]), [1 2 3 4]);
-%inputs_ = shufflecell(constructinput([2 2 2 2]), [1 4]);
+
+pick = {1; [2 3]; 4};
+%vec = [2 2 2 2];
+%shuffl = [1 2 3 4];
+
+%pick = {1; [2 3]; 1};
+%vec = [2 2 2 2]; %must be size 4
+%shuffl = [1 2 3 ];
+
+%inputs = shufflecell(constructinput(vec,pick), shuffl);
+%inputs_ = shufflecell(constructinput([2 2 2 2],pick), [1 4]);
 %inputs = inputs_([1:9 18:29]);
 
 %inputs_ = shufflecell(constructinput([2 2 2 2]), [1 2 3]);
@@ -31,10 +40,12 @@ inputs = inputs1;
 
 %inputs =  {[2 2 2 255]};
 %inputs =  {[2 2 2 2]};
+%inputs =  {[7 2 2 2]};
 %inputs = inputs_sep1;
 %inputs = inputs_sep2;
 %inputs = inputs_sep3;
 
+%inputs = inputs8;
 
 if 1
    

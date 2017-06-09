@@ -1,4 +1,5 @@
-function inin = constructinput(vect)
+function inin = constructinput(vect, pick)
+%pick = {1; [2 3]; 4};
 fact = {0 1 2 3 4 5 6 7 8 -1 -6 256};
 mult = {...
     [0 0]
@@ -16,19 +17,19 @@ inin = cell(length(fact)+length(mult)+length(trig),1);
 
 for i = 1:length(trig)
     avect = vect;
-    avect(1) = trig{i};
+    avect(pick{1}) = trig{i};
     inin{i} = avect;    
 end
 
 for i = 1:length(mult)
     avect = vect;
-    avect([2 3]) = mult{i};
+    avect(pick{2}) = mult{i};
     inin{length(trig)+i} = avect;    
 end
 
 for i = 1:length(fact)
     avect = vect;
-    avect(4) = fact{i};
+    avect(pick{3}) = fact{i};
     inin{length(trig)+length(mult)+i} = avect;    
 end
 % 

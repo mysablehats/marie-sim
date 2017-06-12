@@ -7,6 +7,7 @@
 %filename = 'I:\marking\MARIElab\Example2.7.mas';
 
 if ~exist('filename', 'var')
+    %[filefile, pathname] = uigetfile('.\MARIE lab\graded\*.mas');% uigetfile('*.mas');
     [filefile, pathname] = uigetfile('*.mas');
     filename = [pathname filefile ];
 end
@@ -21,14 +22,17 @@ ipnuts__
 inputs = inputs1;
 
 pick = {1; [2 3]; 4};
-%vec = [2 2 2 2];
-%shuffl = [1 2 3 4];
+vec = [2 2 2 2];
+shuffl = [1 2 3 4];
 
 %pick = {1; [2 3]; 1};
 %vec = [2 2 2 2]; %must be size 4
 %shuffl = [1 2 3 ];
 
+shuffl2 = [4 2 3 ];
+
 %inputs = shufflecell(constructinput(vec,pick), shuffl);
+%inputs = shufflecell(constructinput(vec,pick), shuffl2);
 %inputs_ = shufflecell(constructinput([2 2 2 2],pick), [1 4]);
 %inputs = inputs_([1:9 18:29]);
 
@@ -38,7 +42,10 @@ pick = {1; [2 3]; 4};
 %inputs_ = shufflecell(constructinput([2 2 2 2]), [1 2 3]);
 %inputs = inputs_(10:17);
 
-%inputs =  {[2 2 2 255]};
+%inputs_ = shufflecell(constructinput([2 2 2 2], pick), [2 3]);
+%inputs = inputs_(10:17);
+
+%inputs =  {[100 181 182 100]};
 %inputs =  {[2 2 2 2]};
 %inputs =  {[7 2 2 2]};
 %inputs = inputs_sep1;
@@ -46,6 +53,9 @@ pick = {1; [2 3]; 4};
 %inputs = inputs_sep3;
 
 %inputs = inputs8;
+
+%inputs = {4};
+%inputs = {[4 2]};
 
 if 1
    
@@ -57,5 +67,6 @@ if 1
     for i =1:length(input)
         disp('New prog instance: ')
         [outputs(i), outprog(i)] = marie_sim(Prog, input(i));
+        displayascii(outputs(i).value)
     end
 end

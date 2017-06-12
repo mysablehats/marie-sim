@@ -10,7 +10,7 @@ programlines = textscan(fid, '%s', 'Delimiter',{'\n','\r'}, 'CommentStyle', {'/'
 for i = 1:length(programlines{1})
     program(i).line = regexprep(programlines{1}{i}, '\t', ' '); %%%% substitutes tabs for spaces
     program(i).line = regexprep(program(i).line, '\v', ' ');
-    program(i).line = upper(program(i).line);%%% convert to uppercase
+    %program(i).line = upper(program(i).line);%%% convert to uppercase
     while(strfind(program(i).line,'  ')) %%% removes multiple spaces
         program(i).line = regexprep(program(i).line, '  ', ' ');
     end
@@ -139,7 +139,11 @@ for i = 1:length(program)
                 %                 disp(program(i).line)
                 %                 warning('Hard coded memory address.')
             catch
-                error(['Assembly not successful. Cannot handle operand:' program(i).operand])
+                if ~isempty(str2double(program(i).operand)) %%% lets check if it is a negative number, then leave it alone and see if it compiles
+                    warning(['CANNOT HANDLE OPERAND:' program(i).operand '. I WILL TRY TO LEAVE IT ALONE, BUT THE CODE IS NOT GUARANTEED TO RUN APPROPRIATELY!!!!'])
+                else
+                    error(['Assembly not successful. Cannot handle operand:' program(i).operand])
+                end
             end
             %         elseif            isempty(program(i).opaddress)
             %             disp(program(i).line)
@@ -152,7 +156,7 @@ end
 %%% creating opcodes
 for i = 1:length(program)
     if ~isempty(program(i).operation)
-        switch program(i).operation
+        switch upper(program(i).operation)
             case 'ADD'
                 program(i).opcode = ['3' program(i).opaddress];
             case 'SUBT'

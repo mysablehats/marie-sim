@@ -1,5 +1,4 @@
 # marie-sim
-marie simulator
 
 This simulator was made to automate and speed up the execution of code for the MARIE assembly. Written in MATLAB, MARIE's machine is simulated (it doesnt generate x86 assembly code).
 
@@ -11,13 +10,25 @@ For more details on MARIE's RTL implementation see: [https://github.com/MARIE-js
 
 ## Usage
 
-Open marieloop.m and change the variable 'inputs'. 
+1. Open MATLAB.
+
+2. Open the file marieloop.m and change the variable 'inputs' to the input you want. 
 
 The inputs vector should be a sequence of decimals. Each time the MARIE assembly code encounters an INPUT instruction, the next decimal number will be provided and the input counter updated. 
 
-The outputs are presented on the screen as HEX, DEC exactly after an OUTPUT instruction is found on the code, and after each program execution, as ASCII characters. 
+3. Run marieloop.m and choose the .mas file you want to execute. 
 
+The program will be compiled and if succeeded it will run with the inputs provided. 
 
+Both the input and the outputs are presented on the screen as they are read, in HEX, DEC exactly after an OUTPUT or INPUT instruction is found on the code, and after each program execution, the output is presented as ASCII characters. 
+
+## Debugging
+
+To use the debug feature, it is necessary to set the debug property to true in line 22 of marie_sim. We recommend also setting a break point in one of the lines of the debug output to get a nice stepping function. You can also set breakpoints by changing the breakpoint variable (line 29 of marie_sim) to a vector of all the parts you want to print/stop at. 
+
+## Longer execution cycles
+
+You may want to also increase the amount of cycles MATLAB runs the program (for larger calculations). This can be done by setting `Prog.debug.maxnumiterations` to the amount you want. Larger values are not recommended as MATLAB itself simulating MARIE is not very fast. 
 
 
 ## Known issues

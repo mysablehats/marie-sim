@@ -40,9 +40,8 @@ while(Prog.debug.maxnumiterations>Prog.debug.realprogramcounter) %% ~strcmp(Prog
     [wline, idx, Prog] = Prog.wline(X); %%%% this adds lines to the program for out of index accessed memory locations. necessary since technically you can also write on them. this might break everything since the program will change size in an unpredictable way!
       PC = dec2hextc(hextc2dec(PC)+1,3);%dec2hex(hex2dec(PC)+1,3);
     if Prog.debug.debug||any(li == breakpoint)
-        disp(Prog.prog(li).op)
-        disp(['wOP:' wop ' X:' X ])
-        disp(['AC: ' AC ' PC:' PC ' line:' num2str(li)] )
+        disp(['wOP:' wop ' X:' X '       ' 'AC: ' AC ' PC:' PC ' line:' num2str(li) '              '  Prog.prog(li).op ])
+        %disp(['AC: ' AC ' PC:' PC ' line:' num2str(li)] )
     end
     
     switch wop

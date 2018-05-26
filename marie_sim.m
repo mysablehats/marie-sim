@@ -13,7 +13,7 @@ output.counter = 0;
 
 %%% sets debug variables:
 Prog.debug.realprogramcounter = 0;
-Prog.debug.maxnumiterations = 100000;
+Prog.debug.maxnumiterations = 1000000;
 Prog.debug.crashreason = '';
 Prog.debug.ME = '';
 Prog.debug.PC = PC;
@@ -87,7 +87,7 @@ while(Prog.debug.maxnumiterations>Prog.debug.realprogramcounter) %% ~strcmp(Prog
                 Prog.debug.realprogramcounter = 0; %%% will do this so that i can check a particular program
             end
             try
-                dispp('Input ', input.input(input.counter))
+                dispp('Input ', input.input(input.counter),Prog.debug.realprogramcounter)
                 AC = dec2hextc(input.input(input.counter),4);
             catch
                 Prog.debug.crashreason = 'Ran out of inputs!';
@@ -98,7 +98,7 @@ while(Prog.debug.maxnumiterations>Prog.debug.realprogramcounter) %% ~strcmp(Prog
             %disp(tc(AC,16))
             output.counter = output.counter + 1;
             output.value{output.counter} = AC;
-            dispp('Output',hextc2dec(AC))
+            dispp('Output',hextc2dec(AC),Prog.debug.realprogramcounter)
         case '7'
             Prog.debug.halt = 0;
             break

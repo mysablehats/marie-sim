@@ -1,6 +1,6 @@
-function dispp(what,howmuch)
+function dispp(what,howmuch,numop)
 %fprintf([what ':\tDEC:\t\t%d\tHEX:\t%s\n'], howmuch, dec2hextc(howmuch,4))
-str = sprintf([what ':\tHEX:\t\t%s\tDEC:\t%d\n'], dec2hextc(howmuch,4), howmuch);
+str = sprintf([what ':\tHEX:\t\t%s\tDEC:\t%05d\tNOP:\t%d\n'], dec2hextc(howmuch,4), howmuch,numop);
 fprintf(str)
 persistent h t 
 if isempty(h)

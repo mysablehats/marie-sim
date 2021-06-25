@@ -1,6 +1,6 @@
 # marie-sim
 
-This simulator was made to automate and speed up the execution of code for the MARIE assembly. Written in MATLAB, MARIE's machine is simulated (it doesnt generate x86 assembly code).
+This simulator was made to automate and speed up the execution of code for the MARIE assembly. Written in MATLAB, MARIE's machine is simulated (it doesnt generate x86 assembly code or produce a binary).
 
 This simulator was based on the JRE implementation of MARIE assembly and it tries to mimic it's behaviour to the fullest. This implementation is meant to be used for bulk execution/ marking and provides poor debugging capabilities. For autoring, we recommend using the JRE version ([https://mariejs.xyz/] is nice, but we noticed some differences with the machine code generated and also mariejs has some overflow detections and some nice error detection that should be a part of the difficulty of coding in ASM). 
 
